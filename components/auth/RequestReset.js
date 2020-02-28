@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
-import Form from '../Form';
-import Error from '../ErrorMessage';
+import Form from '../util/Form';
+import Error from '../util/ErrorMessage';
 import { REQUEST_RESET_USER_QUERY } from '../../queries/REQUEST_RESET_USER_QUERY';
 
 class RequestReset extends Component {
@@ -24,7 +24,10 @@ class RequestReset extends Component {
             onSubmit={async e => {
               e.preventDefault();
               const { data } = await requestReset();
-              this.setState({ email: '', successMessage: data.requestReset.message });
+              this.setState({
+                email: '',
+                successMessage: data.requestReset.message,
+              });
             }}
           >
             <fieldset disabled={loading} aria-busy={loading}>
@@ -33,7 +36,13 @@ class RequestReset extends Component {
               {!error && !loading && called && <p>{successMessage}</p>}
               <label htmlFor="email">
                 Email
-                <input type="email" name="email" placeholder="email" value={email} onChange={this.saveToState} />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="email"
+                  value={email}
+                  onChange={this.saveToState}
+                />
               </label>
               <button type="submit">Request Password Reset</button>
             </fieldset>

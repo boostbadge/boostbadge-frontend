@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import CurrentUser from './CurrentUser';
-import Logout from './auth/Logout';
+import CurrentUser from '../auth/CurrentUser';
+import Logout from '../auth/Logout';
 
 const NavStyles = styled.ul`
   margin: 0;
@@ -67,40 +67,45 @@ const NavStyles = styled.ul`
 
 const Nav = () => (
   <CurrentUser>
-    {({ data: { currentUser } }) => (
-      <NavStyles>
-        <Link href="/shop">
-          <a>Shop</a>
-        </Link>
-        <Link href="/members">
-          <a>Members</a>
-        </Link>
-        <Link href="/vehicles">
-          <a>Vehicles</a>
-        </Link>
-        {!currentUser && (
-          <React.Fragment>
-            <Link href="/register">
-              <a>Register</a>
-            </Link>
-            <Link href="/login">
-              <a>Log In</a>
-            </Link>
-          </React.Fragment>
-        )}
-        {currentUser && (
-          <Link
-            href={{
-              pathname: '/member',
-              query: { id: currentUser.id },
-            }}
-          >
-            <a>My Garage</a>
+    {({ data }) => {
+      const getCurrentUser = data ? data.getCurrentUser : null;
+      return (
+        <NavStyles>
+          <Link href="/shop">
+            <a>Shop</a>
           </Link>
-        )}
-        {currentUser && <Logout />}
-      </NavStyles>
-    )}
+          <Link href="/members">
+            <a>Members</a>
+          </Link>
+          <Link href="/vehicles">
+            <a>Vehicles</a>
+          </Link>
+          {!getCurrentUser && (
+            <React.Fragment>
+              <Link href="/register">
+                <a>Register</a>
+              </Link>
+              <Link href="/login">
+                <a>Log In</a>
+              </Link>
+            </React.Fragment>
+          )}
+          {getCurrentUser && (
+            <Link
+              prefetch
+              as={`/member/${getCurrentUser.username}`}
+              href={{
+                pathname: '/member',
+                query: { id: getCurrentUser.id },
+              }}
+            >
+              <a>My Garage</a>
+            </Link>
+          )}
+          {getCurrentUser && <Logout />}
+        </NavStyles>
+      );
+    }}
   </CurrentUser>
 );
 

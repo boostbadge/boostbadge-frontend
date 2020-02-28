@@ -1,8 +1,8 @@
-import UsersList from '../components/members/Users';
+import Users from '../components/users/Users';
 
 const Members = () => (
   <div>
-    <UsersList />
+    <Users />
   </div>
 );
 

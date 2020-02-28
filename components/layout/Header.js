@@ -58,7 +58,7 @@ const Header = () => (
       <Logo>
         <Link href="/">
           <a>
-            <img src="static/boostbadge-logo.png" alt="BOOSTBADGE" />
+            <img src="/boostbadge-logo.png" alt="BOOSTBADGE" />
           </a>
         </Link>
       </Logo>

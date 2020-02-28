@@ -1,7 +1,9 @@
-const Vehicles = () => (
+import Vehicles from '../components/vehicles/Vehicles';
+
+const VehiclesPage = () => (
   <div>
-    <h1>Vehicles</h1>
+    <Vehicles />
   </div>
 );
 
-export default Vehicles;
+export default VehiclesPage;

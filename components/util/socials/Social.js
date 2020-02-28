@@ -11,12 +11,6 @@ const vimeo = '#1ab7ea';
 const Social = ({ type, url }) => {
   if (!url) return null;
 
-  const StyledSpan = styled.span`
-    &:hover {
-      transform: rotate(20deg);
-    }
-  `;
-
   const StyledCircleIcon = styled.i`
     color: ${(type === 'twitter' && twitter) ||
       (type === 'instagram' && instagram) ||
@@ -49,7 +43,9 @@ const Social = ({ type, url }) => {
       <a>
         <span className="fa-stack fa-lg">
           <StyledCircleIcon className="fa fa-circle fa-stack-2x" />
-          <StyledSocialIcon className={`fa fa-${type} fa-stack-1x fa-inverse`} />
+          <StyledSocialIcon
+            className={`fa fa-${type} fa-stack-1x fa-inverse`}
+          />
         </span>
       </a>
     </Link>

@@ -12,7 +12,13 @@ const VerifiedStyles = styled.i`
 
 const Verified = ({ verified }) => {
   if (!verified) return null;
-  return <VerifiedStyles className="fa fa-check-circle" aria-hidden="true" original-title="Verified Account" />;
+  return (
+    <VerifiedStyles
+      className="fa fa-check-circle"
+      aria-hidden="true"
+      original-title="Verified Account"
+    />
+  );
 };
 
 Verified.propTypes = {

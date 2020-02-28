@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import UserSingle from '../components/members/UserSingle';
+import UserSingle from '../components/users/UserSingle';
 
 const Member = ({ query }) => {
   const { id } = query;

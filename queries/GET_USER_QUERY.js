@@ -1,10 +1,10 @@
 import gql from 'graphql-tag';
 
-export const SINGLE_USER_QUERY = gql`
-  query SINGLE_USER_QUERY($id: ID!) {
-    user(id: $id) {
+export const GET_USER_QUERY = gql`
+  query GET_USER_QUERY($id: ID!) {
+    getUser(id: $id) {
       id
-      username
+      displayName
       createdAt
       profilePhoto
       coverPhoto
@@ -22,7 +22,7 @@ export const SINGLE_USER_QUERY = gql`
         year
         make
         model
-        blurb
+        description
       }
     }
   }

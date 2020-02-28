@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Mutation } from 'react-apollo';
-import Form from '../Form';
-import Error from '../ErrorMessage';
+import Form from '../util/Form';
+import Error from '../util/ErrorMessage';
 import { RESET_PASSWORD_USER_QUERY } from '../../queries/RESET_PASSWORD_USER_QUERY';
-import { CURRENT_USER_QUERY } from '../../queries/CURRENT_USER_QUERY';
+import { GET_CURRENT_USER_QUERY } from '../../queries/GET_CURRENT_USER_QUERY';
 
 class ResetPassword extends Component {
   state = {
@@ -27,7 +27,7 @@ class ResetPassword extends Component {
           password,
           confirmPassword,
         }}
-        refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+        refetchQueries={[{ query: GET_CURRENT_USER_QUERY }]}
       >
         {(resetPassword, { error, loading }) => (
           <Form
@@ -43,7 +43,13 @@ class ResetPassword extends Component {
               <Error error={error} />
               <label htmlFor="password">
                 New Password
-                <input type="password" name="password" placeholder="password" value={password} onChange={this.saveToState} />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="password"
+                  value={password}
+                  onChange={this.saveToState}
+                />
               </label>
               <label htmlFor="confirmPassword">
                 New Password

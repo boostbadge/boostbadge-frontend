@@ -4,5 +4,11 @@
     "titleBar.inactiveForeground": "#000000CC",
     "titleBar.activeBackground": "#FF4B00",
     "titleBar.inactiveBackground": "#FF4B00CC"
+  },
+  "files.exclude": {
+    ".gitignore": true,
+    "package-lock.json": true,
+    "readme.md": true,
+    "node_modules/": true
   }
 }

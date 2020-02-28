@@ -1,9 +1,9 @@
 import { Query } from 'react-apollo';
 import PropTypes from 'prop-types';
-import { CURRENT_USER_QUERY } from '../queries/CURRENT_USER_QUERY';
+import { GET_CURRENT_USER_QUERY } from '../../queries/GET_CURRENT_USER_QUERY';
 
 const CurrentUser = props => (
-  <Query {...props} query={CURRENT_USER_QUERY}>
+  <Query {...props} query={GET_CURRENT_USER_QUERY}>
     {payload => props.children(payload)}
   </Query>
 );
