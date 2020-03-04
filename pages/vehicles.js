@@ -1,9 +1,14 @@
-import Vehicles from '../components/vehicles/Vehicles';
+import PropTypes from 'prop-types';
+import VehiclesPage from '../components/vehicles/VehiclesPage';
 
-const VehiclesPage = () => (
+const Vehicles = ({ query }) => (
   <div>
-    <Vehicles />
+    <VehiclesPage page={parseInt(query.page) || 1} />
   </div>
 );
 
-export default VehiclesPage;
+Vehicles.propTypes = {
+  query: PropTypes.object,
+};
+
+export default Vehicles;

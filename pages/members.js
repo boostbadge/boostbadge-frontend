@@ -1,9 +1,14 @@
-import Users from '../components/users/Users';
+import PropTypes from 'prop-types';
+import UsersPage from '../components/users/UsersPage';
 
-const Members = () => (
+const Members = ({ query }) => (
   <div>
-    <Users />
+    <UsersPage page={parseInt(query.page) || 1} />
   </div>
 );
+
+Members.propTypes = {
+  query: PropTypes.object,
+};
 
 export default Members;

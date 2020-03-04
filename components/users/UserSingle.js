@@ -1,101 +1,59 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import Moment from 'react-moment';
 import Head from 'next/head';
 import { Query } from 'react-apollo';
 import Error from '../util/ErrorMessage';
-import CoverPhoto from '../util/CoverPhoto';
-import ProfilePhoto from '../util/ProfilePhoto';
-import Verified from '../util/Verified';
-import Socials from '../util/socials/Socials';
-import VehicleList from '../vehicles/VehicleList';
-import { GET_USER_QUERY } from '../../queries/GET_USER_QUERY';
+import { GET_VEHICLE_QUERY } from '../../queries/GET_VEHICLE_QUERY';
 
-const StyledUser = styled.div`
-  max-width: ${props => props.theme.maxWidth};
-  margin: 2rem auto;
-  padding: 0 0 25px 0;
-  border-bottom: 1px solid ${props => props.theme.lightgrey};
-`;
-
-const StyledMeta = styled.div`
-  display: grid;
-  grid-auto-columns: 240px 1fr;
-  grid-auto-flow: column;
-  grid-gap: 0;
-  padding: 0 0 25px 0;
-`;
-
-const StyledDetails = styled.div`
-  color: ${props => props.theme.grey};
-`;
-
-const StyledName = styled.div`
-  font-size: 24px;
-  line-height: 1.7em;
-  font-weight: 700;
-`;
-
-const StyledJoined = styled.div`
-  font-size: 14px;
-  line-height: 1em;
-  color: #999;
-`;
-
-const StyledDescription = styled.div`
-  font-size: 13px;
-  line-height: 1em;
-  color: #999;
-`;
-
-class UserSingle extends Component {
+class VehicleSingle extends Component {
   render() {
     const { id } = this.props;
     return (
-      <Query query={GET_USER_QUERY} variables={{ id }}>
+      <Query query={GET_VEHICLE_QUERY} variables={{ id }}>
         {({ error, loading, data }) => {
           if (error) return <Error error={error} />;
           if (loading) return <p>Loading...</p>;
-          if (!data.getUser) return <p>No Item Found for {id}</p>;
-          const { getUser } = data;
+          if (!data.getVehicle) return <p>No Vehicle Found for {id}</p>;
+          const { getVehicle } = data;
           return (
-            <StyledUser>
+            <React.Fragment>
               <Head>
-                <title>{getUser.displayName} | BOOSTBADGE</title>
+                <title>{getVehicle.nickname} | BOOSTBADGE</title>
               </Head>
-              <CoverPhoto
-                src={getUser.coverPhoto}
-                displayName={getUser.displayName}
-                isSingle
-              />
-              <StyledMeta>
-                <ProfilePhoto
-                  src={getUser.profilePhoto}
-                  displayName={getUser.displayName}
-                  isSingle
-                />
-                <StyledDetails>
-                  <StyledName>
-                    {getUser.displayName}
-                    <Verified verified={getUser.verified} />
-                  </StyledName>
-                  <StyledJoined>
-                    Joined{' '}
-                    <Moment format="MMMM D, YYYY">{getUser.createdAt}</Moment>
-                  </StyledJoined>
-                  <Socials
-                    twitter={getUser.twitter}
-                    instagram={getUser.instagram}
-                    facebook={getUser.facebook}
-                    youtube={getUser.youtube}
-                    vimeo={getUser.vimeo}
-                  />
-                  <StyledDescription>{getUser.description}</StyledDescription>
-                </StyledDetails>
-              </StyledMeta>
-              <VehicleList vehicles={getUser.vehicles} />
-            </StyledUser>
+              <div>
+                <h4>{getVehicle.featuredImage}</h4>
+                <h4>{getVehicle.nickname}</h4>
+                <h4>{getVehicle.year}</h4>
+                <h4>{getVehicle.make}</h4>
+                <h4>{getVehicle.model}</h4>
+                <h4>{getVehicle.forSale}</h4>
+                <h4>{getVehicle.location}</h4>
+                <h4>{getVehicle.description}</h4>
+                <h4>{getVehicle.exteriorColor}</h4>
+                <h4>{getVehicle.interiorColor}</h4>
+                <h4>{getVehicle.miles}</h4>
+                <h4>{getVehicle.awards}</h4>
+                <h4>{getVehicle.vin}</h4>
+                <h4>{getVehicle.engine}</h4>
+                <h4>{getVehicle.horsepower}</h4>
+                <h4>{getVehicle.torque}</h4>
+                <h4>{getVehicle.transmission}</h4>
+                <h4>{getVehicle.suspension}</h4>
+                <h4>{getVehicle.wheels}</h4>
+                <h4>{getVehicle.tires}</h4>
+                <h4>{getVehicle.brakes}</h4>
+                <h4>{getVehicle.curbWeight}</h4>
+                <h4>{getVehicle.modifications}</h4>
+                <h4>{getVehicle.topSpeed}</h4>
+                <h4>{getVehicle.acceleratingTime}</h4>
+                <h4>{getVehicle.quarterMileTime}</h4>
+                <h4>{getVehicle.brakingTime}</h4>
+                <h4>{getVehicle.url}</h4>
+                <h4>{getVehicle.instagram}</h4>
+                <h4>{getVehicle.facebook}</h4>
+                <h4>{getVehicle.likes}</h4>
+              </div>
+            </React.Fragment>
           );
         }}
       </Query>
@@ -103,8 +61,8 @@ class UserSingle extends Component {
   }
 }
 
-UserSingle.propTypes = {
+VehicleSingle.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-export default UserSingle;
+export default VehicleSingle;

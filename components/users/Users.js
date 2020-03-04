@@ -1,25 +1,34 @@
 import React from 'react';
-import { Query } from 'react-apollo';
-import Head from 'next/head';
-import Error from '../util/ErrorMessage';
-import PageHeader from '../layout/PageHeader';
-import { LIST_USERS_QUERY } from '../../queries/LIST_USERS_QUERY';
-import UserList from './UserList';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import Pagination from '../util/Pagination';
+import CatalogButtonGroup from '../util/CatalogButtonGroup';
+import UsersGrid from './UsersGrid';
+import UsersList from './UsersList';
 
-const Users = () => (
-  <div>
-    <Head>
-      <title>Members | BOOSTBADGE</title>
-    </Head>
-    <PageHeader title="Members" />
-    <Query query={LIST_USERS_QUERY}>
-      {({ data, error, loading }) => {
-        if (loading) return <p>Loading...</p>;
-        if (error) return <Error error={error} />;
-        return <UserList users={data.listUsers} />;
-      }}
-    </Query>
-  </div>
+const StyledListHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+`;
+
+const Users = ({ users, page, isGrid, setIsGrid }) => (
+  <>
+    <Pagination pathname="members" page={page} />
+    <StyledListHeader>
+      <CatalogButtonGroup isGrid={isGrid} setIsGrid={setIsGrid} />
+    </StyledListHeader>
+    {isGrid && <UsersGrid users={users} />}
+    {!isGrid && <UsersList users={users} />}
+    <Pagination pathname="members" page={page} />
+  </>
 );
+
+Users.propTypes = {
+  users: PropTypes.array.isRequired,
+  page: PropTypes.number,
+  isGrid: PropTypes.bool.isRequired,
+  setIsGrid: PropTypes.func.isRequired,
+};
 
 export default Users;
